@@ -1,0 +1,401 @@
+﻿<Window
+    x:Class="QuestEditor.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:QuestEditor"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:view="clr-namespace:QuestEditor.View"
+    xmlns:viewmodel="clr-namespace:QuestEditor.ViewModel"
+    Title="MainWindow"
+    Width="900"
+    Height="600"
+    d:DataContext="{d:DesignInstance Type=viewmodel:MainViewModel}"
+    AllowsTransparency="True"
+    Background="#545454"
+    ResizeMode="CanResizeWithGrip"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="None"
+    mc:Ignorable="d">
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="12*" />
+            <RowDefinition Height="40" />
+        </Grid.RowDefinitions>
+
+        <!--  Top Bar of the Main Window  -->
+        <Border
+            Grid.Row="0"
+            Background="#252525"
+            BorderBrush="#3d3d3d"
+            BorderThickness="1"
+            MouseDown="Border_MouseDown">
+            <Grid HorizontalAlignment="Stretch">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="5*" />
+                    <ColumnDefinition Width="2*" />
+                </Grid.ColumnDefinitions>
+
+                <Label
+                    Grid.Column="0"
+                    HorizontalAlignment="Left"
+                    Content="Quest Editor"
+                    FontFamily="Verdana Pro"
+                    FontSize="14"
+                    FontWeight="DemiBold"
+                    Foreground="AliceBlue" />
+
+
+                <WrapPanel
+                    Grid.Column="1"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center">
+                    <Button
+                        x:Name="SaveQuestButton"
+                        Width="80"
+                        Height="30"
+                        Margin="15,0,0,0"
+                        Background="Transparent"
+                        BorderBrush="Transparent"
+                        BorderThickness="0"
+                        Click="SaveQuestButton_Click"
+                        FontSize="12">
+                        <TextBlock
+                            Padding="0,0,5,0"
+                            FontSize="10.5"
+                            FontWeight="DemiBold"
+                            Text="Save Quest" />
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="LightBlue" />
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border x:Name="Border" Background="{TemplateBinding Background}">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter TargetName="Border" Property="Background" Value="DarkGreen" />
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+
+
+                </WrapPanel>
+
+
+                <!--  Minimize Button  -->
+                <StackPanel
+                    Grid.Column="2"
+                    HorizontalAlignment="Right"
+                    Orientation="Horizontal">
+                    <Button
+                        Width="40"
+                        Height="25"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        Click="ButtonMinimize_Click"
+                        Content="--"
+                        FontWeight="ExtraBold"
+                        Foreground="Gray">
+
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="LightBlue" />
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border x:Name="Border" Background="{TemplateBinding Background}">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter TargetName="Border" Property="Background" Value="Coral" />
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </Button.Style>
+
+                    </Button>
+
+                    <!--  Maximize Button  -->
+                    <Button
+                        Width="40"
+                        Height="25"
+                        Background="Transparent"
+                        BorderBrush="Transparent"
+                        BorderThickness="0"
+                        Click="WindowStateButton_Click"
+                        Content="▢"
+                        FontWeight="ExtraBold"
+                        Foreground="Gray">
+
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="LightBlue" />
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border x:Name="Border" Background="{TemplateBinding Background}">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter TargetName="Border" Property="Background" Value="RoyalBlue" />
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </Button.Style>
+
+
+                    </Button>
+
+                    <!--  Exit Button  -->
+                    <Button
+                        Width="40"
+                        Height="25"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        Click="CloseButton_Click"
+                        Content="X"
+                        FontWeight="ExtraBold"
+                        Foreground="Gray">
+
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="LightBlue" />
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border x:Name="Border" Background="{TemplateBinding Background}">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter TargetName="Border" Property="Background" Value="IndianRed" />
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </Button.Style>
+
+                    </Button>
+
+
+                </StackPanel>
+            </Grid>
+
+        </Border>
+
+        <!--  Middle part of the Main Window  -->
+        <Border Grid.Row="1">
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Border Background="#403e3e">
+
+                    <!--  Dock Panel to show the Quest List  -->
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <Border BorderBrush="#3B3B3B" BorderThickness="0,0,0,2" />
+
+                        <Grid Grid.Row="0">
+                            <!--  QuestList Title  -->
+                            <TextBlock
+                                Margin="15,5,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                FontSize="15">
+                                Quest List
+                            </TextBlock>
+
+                            <!--  Add Quest Button  -->
+                            <Button
+                                Width="30"
+                                Margin="0,0,20,0"
+                                HorizontalAlignment="Right"
+                                Background="Transparent"
+                                BorderBrush="Transparent"
+                                BorderThickness="0"
+                                Click="AddQuestButton_Click"
+                                Content="+"
+                                FontSize="16"
+                                FontWeight="Bold"
+                                Foreground="White"
+                                ToolTip="Create A New Quest">
+
+                                <Button.Style>
+                                    <Style TargetType="{x:Type Button}">
+                                        <Setter Property="Background" Value="LightBlue" />
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type Button}">
+                                                    <Border x:Name="Border" Background="{TemplateBinding Background}">
+                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                    </Border>
+                                                    <ControlTemplate.Triggers>
+                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                            <Setter TargetName="Border" Property="Background" Value="Green" />
+                                                        </Trigger>
+                                                    </ControlTemplate.Triggers>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </Button.Style>
+
+                            </Button>
+
+                        </Grid>
+
+
+
+
+                        <!--  Quest List  -->
+                        <ScrollViewer
+                            x:Name="QuestScrollViewer"
+                            Grid.Row="1"
+                            CanContentScroll="False"
+                            VerticalScrollBarVisibility="Auto">
+
+                            <ContentControl Content="{Binding CurrentViewModel1}">
+                                <ContentControl.Resources>
+                                    <DataTemplate DataType="{x:Type viewmodel:QuestListViewModel}">
+                                        <view:QuestListView x:Name="QuestsListView" />
+                                    </DataTemplate>
+                                </ContentControl.Resources>
+                            </ContentControl>
+
+
+                        </ScrollViewer>
+
+
+
+                    </Grid>
+                </Border>
+
+                <!--  Quest Window  -->
+                <Border Grid.Column="1" Background="#434147">
+                    <Grid>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <Border BorderBrush="#3B3B3B" BorderThickness="0,0,0,2" />
+
+
+                        <TextBlock
+                            Grid.Row="0"
+                            Margin="5,5,0,0"
+                            VerticalAlignment="Center"
+                            FontSize="15"
+                            Text="Quest Detail" />
+
+
+                        <!--  Quest Data Window  -->
+                        <Grid Grid.Row="1">
+
+                            <!--  Seperate the Quest's Data View with the Quest's Update List View  -->
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="10*" />
+                                <RowDefinition Height="2*" />
+                            </Grid.RowDefinitions>
+
+                            <!--  View of Data of Quest  -->
+                            <ContentControl Grid.Row="0" Content="{Binding CurrentViewModel2}">
+                                <ContentControl.Resources>
+                                    <DataTemplate DataType="{x:Type viewmodel:QuestViewModel}">
+                                        <view:QuestView />
+                                    </DataTemplate>
+
+                                    <DataTemplate DataType="{x:Type viewmodel:QuestUpdateViewModel}">
+                                        <view:QuestUpdateView />
+                                    </DataTemplate>
+
+                                    <DataTemplate DataType="{x:Type viewmodel:QuestEmptyViewModel}">
+                                        <view:QuestEmptyView />
+                                    </DataTemplate>
+                                </ContentControl.Resources>
+                            </ContentControl>
+
+                            <!--  View of Quest Update List  -->
+                            <ContentControl Grid.Row="1" Content="{Binding CurrentViewModel3}">
+                                <ContentControl.Resources>
+                                    <DataTemplate DataType="{x:Type viewmodel:QuestViewModel}">
+                                        <view:QuestUpdateList />
+                                    </DataTemplate>
+
+                                    <DataTemplate DataType="{x:Type viewmodel:QuestUpdateEmptyViewModel}">
+                                        <view:QuestUpdateEmptyView />
+                                    </DataTemplate>
+                                </ContentControl.Resources>
+                            </ContentControl>
+
+
+
+                        </Grid>
+
+                    </Grid>
+                </Border>
+
+
+
+            </Grid>
+        </Border>
+
+        <!--  Bottom Bar of the Main Window  -->
+        <Border Grid.Row="2">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Border Grid.Column="0" Background="#303030">
+
+                    <TextBlock Foreground="CornflowerBlue" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,10,0,0" FontStyle="Italic" Text="Version:Beta - Teresuki" />
+                </Border>
+
+                <Border Grid.Column="1" Background="#303030">
+
+                    <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" />
+                </Border>
+
+            </Grid>
+
+        </Border>
+
+
+    </Grid>
+
+</Window>

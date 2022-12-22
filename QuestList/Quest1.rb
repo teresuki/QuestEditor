@@ -1,0 +1,1 @@
+$quest_list << Quest.new("New Quest", 0, 0, "Detail Of The New Quest")

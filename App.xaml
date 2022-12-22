@@ -1,0 +1,36 @@
+﻿<Application
+    x:Class="QuestEditor.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:QuestEditor">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="./Themes/QuestCard.xaml" />
+                <ResourceDictionary Source="./Themes/QuestUpdateCard.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+
+            <Style TargetType="{x:Type TextBlock}">
+                <Setter Property="TextBlock.Foreground" Value="#ECFEFF" />
+                <Setter Property="TextBlock.Margin" Value="5 0 0 0" />
+                <Setter Property="TextBlock.FontFamily" Value="Verdana Pro" />
+            </Style>
+
+            <Style TargetType="{x:Type Label}">
+                <Setter Property="TextBlock.FontFamily" Value="Verdana Pro" />
+                <Setter Property="TextBlock.Margin" Value="5 0 0 0" />
+            </Style>
+
+            <Style TargetType="{x:Type ToolTip}">
+                <Setter Property="Background" Value="Gray" />
+                <Setter Property="Foreground" Value="White" />
+            </Style>
+
+
+
+        </ResourceDictionary>
+
+
+    </Application.Resources>
+</Application>
